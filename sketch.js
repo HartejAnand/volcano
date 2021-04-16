@@ -5,14 +5,14 @@ var diamond1,diamond2,diamond3,diamond4,diamond5,diamond6,diamond7,diamond8,diam
 var hat, hatI;
 
 function preload(){
-  ground=loadImage("dirt.jpg");
+  ground=loadImage("rock.jpg");
   lavaI=loadImage("lava.png");
   diamondI=loadImage("diamond.png");
   hatI=loadImage("hat.png");
 }
 
 function setup() {
-  createCanvas(displayWidth*2,displayHeight*2);
+  createCanvas(displayWidth,displayHeight);
 
   lava1=createSprite(random(0,displayWidth*2),random(0,displayHeight*2));
   lava1.addImage(lavaI);
@@ -70,32 +70,54 @@ function setup() {
   diamond9.addImage(diamondI);
   diamond9.scale=0.1;
   
-  hat=createSprite(displayWidth,displayHeight);
+  hat=createSprite(500,500);
   hat.addImage(hatI);
   hat.scale=0.4;
+  
+  
 }
 
 
 
 function draw() {
-  background(ground);
+  background(50,20,0);
 
   if(keyDown("up")){
-    hat.y--;
+    hat.y-=2;
   }
   if(keyDown("down")){
-    hat.y++;
+    hat.y+=2;
   }
   if(keyDown("left")){
-    hat.x--;
+    hat.x-=3;
   }
   if(keyDown("right")){
-    hat.x++;
+    hat.x+=3;
   }
-
+  
   camera.position.x = hat.position.x;
   camera.position.y = hat.position.y;
+
+  console.log(camera.position.x);
+  console.log(camera.position.y);
   
+  if(hat.x>displayWidth*2){
+    hat.x-=3;
+  }
+  if(hat.x<0){
+    hat.x+=3;
+  }
+  if(hat.y>displayHeight*2){
+    hat.y-=2;
+  }
+  if(hat.y<0){
+    hat.y+=2;
+  }
   drawSprites();
+
+  noFill();
+  strokeWeight(5);
+  stroke(155,255,0);
+  rect(0,0,width*2,height*2);
 }
 
